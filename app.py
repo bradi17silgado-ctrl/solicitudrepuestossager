@@ -1,14 +1,23 @@
 from flask import Flask, render_template, request, redirect, session, flash
 import mysql.connector
+import requests
 import os
 
 app = Flask(__name__)
 app.secret_key = "123456789003"
 
-# ==========================================
-# CONEXIÓN A RAILWAY
-# ==========================================
 
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+
+
+
+# =========================
+# CONEXIÓN MYSQL
+# ======================= ==
 def get_db():
     return mysql.connector.connect(
         host="reseau.proxy.rlwy.net",
@@ -18,124 +27,112 @@ def get_db():
         database="railway"
     )
 
-# ==========================================
+# =========================
 # LOGIN
-# ==========================================
-
-@app.route("/login", methods=["GET", "POST"])
+# =========================
+@app.route('/login', methods=['GET', 'POST'])
 def login():
 
-    if request.method == "POST":
+    if request.method == 'POST':
 
-        try:
-
-            usuario = request.form["usuario"]
-            contraseña = request.form["contraseña"]
-
-            conn = get_db()
-            cursor = conn.cursor(dictionary=True)
-
-            cursor.execute("""
-                SELECT *
-                FROM usuarios
-                WHERE usuario=%s
-                AND contraseña=%s
-            """, (usuario, contraseña))
-
-            user = cursor.fetchone()
-
-            cursor.close()
-            conn.close()
-
-            if user:
-
-                session.clear()
-
-                session["id"] = user["id"]
-                session["nombre"] = user["nombre"]
-                session["rol"] = user["rol"]
-
-                return redirect("/inicio")
-
-            return render_template(
-                "login.html",
-                error="Usuario o contraseña incorrectos"
-            )
-
-        except Exception as e:
-            return f"ERROR LOGIN: {e}"
-
-    return render_template("login.html")
-
-
-# ==========================================
-# INICIO
-# ==========================================
-
-@app.route("/")
-def home():
-    return redirect("/inicio")
-
-
-@app.route("/inicio")
-def inicio():
-
-    if "id" not in session:
-        return redirect("/login")
-
-    try:
+        usuario = request.form['usuario']
+        contraseña = request.form['contraseña']
 
         conn = get_db()
         cursor = conn.cursor(dictionary=True)
 
         cursor.execute("""
             SELECT *
-            FROM solicitudes
-            ORDER BY id DESC
-        """)
+            FROM usuarios
+            WHERE usuario = %s
+            AND contraseña = %s
+        """, (usuario, contraseña))
 
-        solicitudes = cursor.fetchall()
+        user = cursor.fetchone()
 
         cursor.close()
         conn.close()
 
+        if user:
+            session.clear()
+
+            session['id'] = user['id']
+            session['nombre'] = user['nombre']
+            session['rol'] = user['rol']
+
+            return redirect('/inicio')
+
         return render_template(
-            "index.html",
-            solicitudes=solicitudes,
-            nombre=session["nombre"],
-            rol=session["rol"]
+            'login.html',
+            error='Usuario o contraseña incorrectos'
         )
 
-    except Exception as e:
-        return f"ERROR INICIO: {e}"
+    return render_template('login.html')
 
 
-# ==========================================
+# =========================
+# RAÍZ DEL SISTEMA
+# =========================
+@app.route('/')
+def home():
+    return redirect('/inicio')
+
+
+# =========================
+# INICIO
+# =========================
+@app.route('/inicio')
+def index():
+
+    if 'id' not in session:
+        return redirect('/login')
+
+    conn = get_db()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT *
+        FROM solicitudes
+        ORDER BY id DESC
+    """)
+
+    solicitudes = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return render_template(
+        'index.html',
+        solicitudes=solicitudes,
+        nombre=session['nombre'],
+        rol=session['rol']
+    )
+
+# =========================
 # CREAR SOLICITUD
-# ==========================================
-
-@app.route("/solicitar", methods=["GET", "POST"])
+# =========================
+@app.route('/solicitar', methods=['GET', 'POST'])
 def solicitar():
 
-    if "id" not in session:
-        return redirect("/login")
+    if 'id' not in session:
+        return redirect('/login')
 
-    if request.method == "POST":
+    if request.method == 'POST':
 
         try:
 
-            vendedor = request.form["vendedor"]
-            codigo = request.form["codigo"]
-            cantidad = request.form["cantidad"]
-            sede = request.form["sede"]
+            vendedor = request.form.get('vendedor')
+            codigo = request.form.get('codigo')
+            cantidad = request.form.get('cantidad')
+            sede = request.form.get('sede')
 
             conn = get_db()
             cursor = conn.cursor()
 
             cursor.execute("""
                 INSERT INTO solicitudes
-                (vendedor,codigo,cantidad,estado,sede)
-                VALUES(%s,%s,%s,%s,%s)
+                (vendedor, codigo, cantidad, estado, sede)
+                VALUES (%s, %s, %s, %s, %s)
             """, (
                 vendedor,
                 codigo,
@@ -149,130 +146,119 @@ def solicitar():
             cursor.close()
             conn.close()
 
-            flash("Solicitud registrada correctamente", "success")
+            flash("✅ Tu solicitud fue registrada exitosamente", "success")
 
-            return redirect("/solicitar")
+            return redirect('/solicitar')
 
         except Exception as e:
-            return f"ERROR AL INSERTAR: {e}"
+            print("ERROR AL GUARDAR:", e)
+            return f"Error al guardar: {e}"
 
-    return render_template("solicitar.html")
+    return render_template('solicitar.html')
 
 
-# ==========================================
+# =========================
 # CAMBIAR ESTADO
-# ==========================================
-
-@app.route("/estado/<int:id>/<nuevo_estado>")
+# =========================
+@app.route('/estado/<int:id>/<nuevo_estado>')
 def cambiar_estado(id, nuevo_estado):
 
-    if "id" not in session:
-        return redirect("/login")
+    if 'id' not in session:
+        return redirect('/login')
 
-    try:
+    estados_validos = [
+        'Pendiente',
+        'Buscar',
+        'Listo',
+        'No Disponible'
+    ]
 
-        conn = get_db()
-        cursor = conn.cursor()
+    if nuevo_estado not in estados_validos:
+        return "Estado no válido"
 
-        cursor.execute("""
-            UPDATE solicitudes
-            SET estado=%s
-            WHERE id=%s
-        """, (nuevo_estado, id))
+    conn = get_db()
+    cursor = conn.cursor()
 
-        conn.commit()
+    cursor.execute("""
+        UPDATE solicitudes
+        SET estado = %s
+        WHERE id = %s
+    """, (nuevo_estado, id))
 
-        cursor.close()
-        conn.close()
+    conn.commit()
 
-        return redirect("/pendientes")
+    cursor.close()
+    conn.close()
 
-    except Exception as e:
-        return str(e)
+    return redirect('/pendientes')
 
-
-# ==========================================
+# =========================
 # ELIMINAR
-# ==========================================
-
-@app.route("/estado/<int:id>/Borrar")
+# =========================
+@app.route('/estado/<int:id>/Borrar')
 def borrar(id):
 
-    if "id" not in session:
-        return redirect("/login")
+    if 'id' not in session:
+        return redirect('/login')
 
-    try:
+    conn = get_db()
+    cursor = conn.cursor()
 
-        conn = get_db()
-        cursor = conn.cursor()
+    cursor.execute("""
+        DELETE FROM solicitudes
+        WHERE id = %s
+    """, (id,))
 
-        cursor.execute("""
-            DELETE FROM solicitudes
-            WHERE id=%s
-        """, (id,))
+    conn.commit()
 
-        conn.commit()
+    cursor.close()
+    conn.close()
 
-        cursor.close()
-        conn.close()
-
-        return redirect("/pendientes")
-
-    except Exception as e:
-        return str(e)
+    return redirect('/pendientes')
 
 
-# ==========================================
+# =========================
 # PENDIENTES
-# ==========================================
-
-@app.route("/pendientes")
+# =========================
+@app.route('/pendientes')
 def pendientes():
 
-    if "id" not in session:
-        return redirect("/login")
+    if 'id' not in session:
+        return redirect('/login')
 
-    try:
+    conn = get_db()
+    cursor = conn.cursor(dictionary=True)
 
-        conn = get_db()
-        cursor = conn.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT *
+        FROM solicitudes
+        ORDER BY id DESC
+    """)
 
-        cursor.execute("""
-            SELECT *
-            FROM solicitudes
-            ORDER BY id DESC
-        """)
+    solicitudes = cursor.fetchall()
 
-        solicitudes = cursor.fetchall()
+    cursor.close()
+    conn.close()
 
-        cursor.close()
-        conn.close()
-
-        return render_template(
-            "pendientes.html",
-            solicitudes=solicitudes
-        )
-
-    except Exception as e:
-        return str(e)
+    return render_template(
+        'pendientes.html',
+        solicitudes=solicitudes
+    )
 
 
-# ==========================================
+# =========================
 # CERRAR SESIÓN
-# ==========================================
-
-@app.route("/logout")
+# =========================
+@app.route('/logout')
 def logout():
 
     session.clear()
 
-    return redirect("/login")
+    return redirect('/login')
 
 
-# ==========================================
-# RENDER
-# ==========================================
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+# =========================
+# EJECUTAR APP
+# =========================
+if __name__ == '__main__':
+    app.run(debug=True)
