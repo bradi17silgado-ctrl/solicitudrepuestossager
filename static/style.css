@@ -7,302 +7,269 @@ body {
     min-height: 100vh;
 }
 
-/* CONTENEDOR */
-.container {
-    margin-top: 120px;
-    background-color: transparent;
+/* =========================
+   CONTENEDOR
+========================= */
+
+.container{
+    margin-top:100px;
+    background:transparent;
 }
 
-/* TITULOS */
-h1,
-h2,
-h3 {
-    width: 100%;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+/* =========================
+   TITULOS
+========================= */
+
+h1,h2,h3{
+    width:100%;
+    font-family:'Franklin Gothic Medium','Arial Narrow',Arial,sans-serif;
 }
 
-h2 {
-    height: 60px;
-    background-color: transparent;
-    background-image: linear-gradient(90deg, #0097D9 0%, #0070B4 100%);
+h2{
+    height:60px;
+    background-image:linear-gradient(90deg,#0097D9,#0070B4);
 }
 
-h3 {
-    height: 60px;
-    padding: 3px 5px;
+h3{
+    height:60px;
+    padding:3px 5px;
 }
 
-/* FORMULARIOS */
+/* =========================
+   FORMULARIOS
+========================= */
+
 form,
-tr {
-    width: 100%;
-    height: 60px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+tr{
+    width:100%;
+    height:60px;
+    font-family:'Franklin Gothic Medium','Arial Narrow',Arial,sans-serif;
 }
 
-.form-control {
-    background: transparent !important;
-    backdrop-filter: none;
+.form-control{
+    background:#fff !important;
+    color:#000 !important;
 }
 
-select {
-    width: 100%;
-    height: 40px;
-    background: transparent !important;
-    border: 1px solid #ccc;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+/* ESTE ERA EL PROBLEMA */
+
+.form-select,
+select{
+    width:100%;
+    height:40px;
+    background:#fff !important;
+    color:#000 !important;
+    border:1px solid #ced4da;
 }
 
-/* BOTONES */
-.btn-enviar {
-    display: block;
-    margin-top: 10px;
+.form-select option,
+select option{
+    background:#fff;
+    color:#000;
 }
 
-.btn-regresar {
-    background: linear-gradient(135deg, #3b82f6, #1e40af);
-    color: white;
-    padding: 9px 15px;
-    border: none;
-    border-radius: 30px;
-    font-size: 15px;
-    font-weight: 400;
-    cursor: pointer;
-    transition: 0.3s;
+/* =========================
+   BOTONES
+========================= */
+
+.btn-enviar{
+    display:block;
+    margin-top:10px;
 }
 
-/* ALERTAS */
-.alert-success {
-    background: #d1fae5;
-    color: #065f46;
-    border: 1px solid #10b981;
-    padding: 12px;
-    margin: 15px 0;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: bold;
+.btn-regresar{
+    background:linear-gradient(135deg,#3b82f6,#1e40af);
+    color:white;
+    padding:9px 15px;
+    border:none;
+    border-radius:30px;
+    font-size:15px;
+    cursor:pointer;
 }
 
-/* TABLAS */
-table {
-    background: rgba(255,255,255,0.95);
-    border-radius: 10px;
-    overflow: hidden;
+/* =========================
+   ALERTAS
+========================= */
+
+.alert-success{
+    background:#d1fae5;
+    color:#065f46;
+    border:1px solid #10b981;
+    padding:12px;
+    margin:15px 0;
+    border-radius:8px;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* =========================
+   TABLAS
+========================= */
+
+table{
+    background:rgba(255,255,255,.95);
+    border-radius:10px;
+    overflow:hidden;
 }
 
 .table,
 .table th,
-.table td {
-    background: transparent !important;
+.table td{
+    background:transparent !important;
 }
 
-thead th {
-    background-color: #ffffff;
-    color: black;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
+thead th{
+    background:#fff;
+    color:#000;
+    text-align:center;
+    font-size:18px;
 }
 
-tbody td {
-    font-size: 16px;
-    font-weight: 500;
-    vertical-align: middle;
+tbody td{
+    font-size:16px;
+    vertical-align:middle;
 }
 
-/* MENÚ LATERAL */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 280px;
-    height: 100vh;
-    background: #12395e;
-    padding-top: 20px;
-    transition: transform 0.3s ease;
-}
+/* =========================
+   TOPBAR
+========================= */
 
-/* MENÚ OCULTO */
-.sidebar.oculto {
-    transform: translateX(-100%);
-       }
-
-.sidebar h3 {
-    color: white;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.sidebar a {
-    display: block;
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    padding: 15px 20px;
-    font-size: 18px;
-    transition: 0.3s;
-}
-
-.sidebar a:hover {
-    background: #2563eb;
-}
-
-/* BOTÓN MENÚ */
-.menu-btn {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1000;
-
-    background: transparent;
-    color: rgb(255, 255, 255);
-    border: none;
-    padding: 0px 5px;
-    border-radius: 18px;
-    font-size: 32px;
-    cursor: pointer;
-}
-
-/* CONTENIDO PRINCIPAL */
-.main-content {
-    max-width: 1500px;
-    margin: 0 auto;
-    transition: 0.3s;
-}
-
-.main-content h2 {
-    background: #4a89dc;
-    padding: 15px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-/* BARRA SUPERIOR */
 .topbar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background: #1f4f77;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 25px;
-    z-index: 999;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    background:#1f4f77;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 25px;
+    z-index:999;
 }
 
-  .usuario-info{
-    min-width: 80px;
-    text-align: center;
-}
-
-.topbar-left{
-    display: flex;
-    align-items: center;
-
-}
-
+.topbar-left,
 .topbar-center{
-    display: flex;
-    align-items: center;
-    
+    display:flex;
+    align-items:center;
 }
 
 .topbar-right{
-    position: absolute ;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    min-width: 280px;
-    display: flex;
-    align-items: center;
-    gap: 0px;
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    align-items:center;
 }
 
+/* =========================
+   LOGO
+========================= */
+
 .logo-empresa{
-    width: 320px;
-    height: 67px;
-    background: white;
-    border-radius: 35px;
-    margin-left: -50px;
-    object-fit: contain;
-   
-    
-
-
-    
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width:320px;
+    height:67px;
+    background:#fff;
+    border-radius:35px;
+    margin-left:-50px;
+    object-fit:contain;
 }
 
 .logo-sager{
-    color: white;
-    margin: 0;
-    font-size: 28px;
-    font-weight: bold;
-    
+    color:#fff;
+    font-size:28px;
+    font-weight:bold;
 }
 
-.icono{
-    font-size: 24px;
-    margin-left: 20px;
-    cursor: pointer;
-}
+/* =========================
+   MENU
+========================= */
 
-/* BOTON MENU */
 .menu-btn{
-    background: transparent;
-    border: none;
-    color: rgb(0, 0, 0);
-    font-size: 34px;
-    cursor: pointer;
-    padding: 0;
+    background:transparent;
+    border:none;
+    color:#000;
+    font-size:34px;
+    cursor:pointer;
 }
 
-/* MENU */
 .sidebar{
-    position: fixed;
-    top: 70px;
-    left: 0;
-    width: 280px;
-    height: calc(100vh - 70px);
-    background: #1f4f77;
-    transition: transform 0.3s ease;
+    position:fixed;
+    top:70px;
+    left:0;
+    width:280px;
+    height:calc(100vh - 70px);
+    background:#1f4f77;
+    transition:.3s;
 }
 
 .sidebar.oculto{
-    transform: translateX(-100%);
+    transform:translateX(-100%);
 }
 
-/* CONTENIDO */
-.container{
-    margin-top: 100px;
+.sidebar h3{
+    color:white;
+    text-align:center;
 }
 
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:15px 20px;
+    font-size:18px;
+}
+
+.sidebar a:hover{
+    background:#2563eb;
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.main-content{
+    max-width:1500px;
+    margin:auto;
+}
+
+.main-content h2{
+    background:#4a89dc;
+    padding:15px;
+    margin-bottom:10px;
+    text-align:center;
+}
+
+/* =========================
+   USUARIO
+========================= */
 
 .usuario-info{
-    position: absolute;
-    right: 20px;
-
-    display: flex;
-    flex-direction: column;
-
-    color: white;
-    text-align: center;
+    position:absolute;
+    right:20px;
+    display:flex;
+    flex-direction:column;
+    color:white;
+    text-align:center;
 }
 
 .usuario-nombre{
-    font-size: 18px;
-    font-weight: bold;
+    font-size:18px;
+    font-weight:bold;
 }
 
-.usuario-rol{
-    font-size: 14px;
+.usuario-rol,
+.usuario-sede{
+    font-size:14px;
 }
 
 .usuario-sede{
-    font-size: 14px;
-    color: #d1d5db;
+    color:#d1d5db;
+}
+
+.icono{
+    font-size:24px;
+    margin-left:20px;
+    cursor:pointer;
 }
