@@ -72,59 +72,60 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">
-                    Solicitud
-                </label>
-                 
-                <select name="sede"
-                        class="form-select"
-                        required>
+    <label class="form-label">
+        Sede Origen
+    </label>
 
-                    <option value="">
-                        Sede Origen
-                    </option>
+    <select name="sede_origen"
+            class="form-select"
+            required>
 
-                    <option value="BODEGA CALLE 67">
-                        BODEGA CALLE 67
-                    </option>
+        <option value="" selected disabled>
+            Seleccione una sede
+        </option>
 
-                    <option value="ALMACEN">
-                        ALMACEN
-                    </option>
+        <option value="BODEGA CALLE 67">
+            BODEGA CALLE 67
+        </option>
 
-                    <option value="ESQUINA">
-                        ESQUINA
-                    </option>
+        <option value="ALMACEN">
+            ALMACEN
+        </option>
 
-                </select>
-                 <br>
-                 <br>
+        <option value="ESQUINA">
+            ESQUINA
+        </option>
 
+    </select>
+</div>
 
+<div class="mb-3">
+    <label class="form-label">
+        Sede Destino
+    </label>
 
+    <select name="sede_destino"
+            class="form-select"
+            required>
 
-                <select name="sede"
-                        class="form-select"
-                        required>
+        <option value="" selected disabled>
+            Seleccione una sede
+        </option>
 
-                    <option value="">
-                        Sede Destino
-                    </option>
+        <option value="BODEGA CALLE 67">
+            BODEGA CALLE 67
+        </option>
 
-                    <option value="BODEGA CALLE 67">
-                        BODEGA CALLE 67
-                    </option>
+        <option value="ALMACEN">
+            ALMACEN
+        </option>
 
-                    <option value="ALMACEN">
-                        ALMACEN
-                    </option>
+        <option value="ESQUINA">
+            ESQUINA
+        </option>
 
-                    <option value="ESQUINA">
-                        ESQUINA
-                    </option>
-
-                </select>
-            </div>
+    </select>
+</div>
 
             <button type="submit"
                     class="btn btn-primary">
