@@ -1,0 +1,302 @@
+body {
+    background-image: url('/static/fondo.jpg');
+    background-size: 850px;
+    background-repeat: no-repeat;
+    background-position: center 80px;
+    background-attachment: fixed;
+    background-color: #ffffff;
+    min-height: 100vh;
+}
+
+/* =========================
+   CONTENEDOR
+========================= */
+
+.container{
+    margin-top:100px;
+    background:transparent;
+}
+
+/* =========================
+   TITULOS
+========================= */
+
+h1,h2,h3{
+    width:100%;
+    font-family:'Franklin Gothic Medium','Arial Narrow',Arial,sans-serif;
+    color:black;
+}
+
+h2{
+    height:60px;
+    background-image:linear-gradient(90deg,#0097D9,#0070B4);
+}
+
+h3{
+    height:60px;
+    padding:3px 5px;
+}
+
+/* =========================
+   FORMULARIOS
+========================= */
+
+form,
+tr{
+    width:100%;
+    height:60px;
+    font-family:'Franklin Gothic Medium','Arial Narrow',Arial,sans-serif;
+}
+
+.form-control{
+    background: transparent !important;
+    color:#000 !important;
+    border:1px solid rgba(0,0,0,.2) !important;
+}
+
+.form-select,
+select{
+    width:100%;
+    height:40px;
+    background: transparent !important;
+    color:#000 !important;
+    border:1px solid rgba(0,0,0,.2);
+}
+.form-select option,
+select option{
+    background:#fff;
+    color:#000;
+}
+
+/* Contenedor del formulario transparente */
+.container {
+    background: transparent !important;
+}
+
+label.form-label {
+    font-weight: 600;
+    color: #1a1a1a;
+    text-shadow: 0 0 6px rgba(255,255,255,0.8);
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.btn-enviar{
+    display:block;
+    margin-top:10px;
+}
+
+.btn-regresar{
+    background:linear-gradient(135deg,#3b82f6,#1e40af);
+    color:white;
+    padding:9px 15px;
+    border:none;
+    border-radius:30px;
+    font-size:15px;
+    cursor:pointer;
+}
+
+/* =========================
+   ALERTAS
+========================= */
+
+.alert-success{
+    background:#d1fae5;
+    color:#065f46;
+    border:1px solid #10b981;
+    padding:12px;
+    margin:15px 0;
+    border-radius:8px;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* =========================
+   TABLAS
+========================= */
+
+table{
+    background:rgba(255,255,255,.95);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.table,
+.table th,
+.table td{
+    background:transparent !important;
+}
+
+thead th{
+    background:#fff;
+    color:#000;
+    text-align:center;
+    font-size:18px;
+}
+
+tbody td{
+    font-size:16px;
+    vertical-align:middle;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    background:#1f4f77;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 25px;
+    z-index:999;
+}
+
+.topbar-left,
+.topbar-center{
+    display:flex;
+    align-items:center;
+}
+
+.topbar-right{
+    position:absolute;
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo-empresa{
+    width:340px;
+    height:70px;
+    background:#fff;
+    border-radius:55px;
+    object-fit:contain;
+    margin-left:-110px; /* Mueve el logo un poco a la izquierda sin tapar el botón */
+}
+.logo-sager{
+    color:#fff;
+    font-size:25px;
+    font-weight:bold;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu-btn{
+    background:transparent;
+    border:none;
+    color:#000000;
+    font-size:34px;
+    cursor:pointer;
+    margin-right: 12px;
+    flex-shrink: 0;
+    position:relative;
+    z-index:1000; /* El botón queda por encima del logo */
+}
+
+.sidebar{
+    position:fixed;
+    top:70px;
+    left:0;
+    width:280px;
+    height:calc(100vh - 70px);
+    background:#1f4f77;
+    transition:.3s;
+    z-index: 998;
+    overflow-y: auto;
+}
+
+.sidebar.oculto{
+    transform:translateX(-100%);
+    color: black;
+}
+
+.sidebar h3{
+    color:white;
+    text-align:center;
+}
+
+.sidebar a{
+    display:block;
+    color:rgb(255, 255, 255);
+    text-decoration:none;
+    padding:15px 20px;
+    font-size:18px;
+}
+
+.sidebar a:hover{
+    background:#2563eb;
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.main-content{
+    max-width:1500px;
+    margin:auto;
+}
+
+.main-content h2{
+    background:#ffffff;
+    padding:15px;
+    margin-bottom:10px;
+    text-align:center;
+}
+
+/* =========================
+   USUARIO
+========================= */
+
+.usuario-info{
+    display:flex;
+    flex-direction:column;
+    color:white;
+    text-align:left;
+}
+
+.usuario-nombre{
+    font-size:12px;
+    font-weight:bold;
+}
+
+.usuario-rol,
+.usuario-sede{
+    font-size:14px;
+}
+
+.usuario-sede{
+    color:#d1d5db;
+}
+
+.icono{
+    font-size:24px;
+    cursor:pointer;
+}
+
+/* =========================
+   BOTONES DE ACCIONES
+========================= */
+
+.btn-nueva{
+    margin-right: 90px;
+}
+
+.btn-volver{
+    margin-left: 90px;
+}
