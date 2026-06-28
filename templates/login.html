@@ -9,18 +9,13 @@
     <style>
 
         body{
-            background-image: url("{{ url_for('static', filename='fondo.jpg') }}");
-            background-size: 750px;
-            background-repeat: no-repeat;
-            background-position: center 50px;
-            background-attachment: fixed;
-            background-color: #ffffff;
-            min-height: 100vh;
+            
             margin:0;
             height:100vh;
             display:flex;
             justify-content:center;
             align-items:center;
+            background:#f4f4f4;
             font-family:Arial, sans-serif;
         }
 
@@ -72,6 +67,10 @@
 <body>
 
     <div class="login-container">
+
+        <img src="{{ url_for('static', filename='logo.png') }}"
+         alt="Logo"
+         class="logo">
 
         <h2>Inicio de Sesión</h2>
 
