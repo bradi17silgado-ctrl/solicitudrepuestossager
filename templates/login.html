@@ -60,6 +60,13 @@
             margin-top:10px;
         }
 
+        .logo{
+              width:120px;
+              height:auto;
+              display:block;
+              margin:0 auto 20px;
+                 }
+
     </style>
 
 </head>
@@ -67,9 +74,13 @@
 
     <div class="login-container">
 
-        <img src="{{ url_for('static', filename='fondo.jpg') }}"
-         alt="fondo"
-         class="fondo">
+        <div class="login-container">
+
+    <img src="{{ url_for('static', filename='fondo.jpg') }}" class="logo" alt="Logo">
+
+    <h2>Inicio de Sesión</h2>
+
+    <form method="POST">
 
         <h2>Inicio de Sesión</h2>
 
