@@ -9,7 +9,7 @@
     <style>
 
         body{
-            background-image: url('/static/fondo.jpg');
+            background-image: url("{{ url_for('static', filename='fondo.jpg') }}");
             background-size: 750px;
             background-repeat: no-repeat;
             background-position: center 50px;
@@ -21,7 +21,6 @@
             display:flex;
             justify-content:center;
             align-items:center;
-            background:#f4f4f4;
             font-family:Arial, sans-serif;
         }
 
